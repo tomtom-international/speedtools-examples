@@ -1,0 +1,22 @@
+GATLING LOAD TEST TOOL
+----------------------
+
+Gatling is a load testing tool for web services.
+
+Gatling itself was written in Scala and the JARs to execute Gatling
+have been included in this repository.
+
+Gatling scenarios are written in Scala, using Gatling libraries.
+You can find them in <GATLING-HOME>/user-files/scenarios
+
+To execute Gatling, type:
+<GATLING-HOME/bin/gatling.sh
+
+If you wish to edit the scenarios in IntelliJ IDEA, you might wish
+to add the Gatling JARs from <GATLING-HOME>/lib to the project (in
+IDEA), so the editor is able to show syntax highlighting.
+
+For more info, please refer to the Gatling website (gatling-tool.org).
+
+Rijn Buve
+2014-03-12
