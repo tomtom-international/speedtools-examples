@@ -3,32 +3,39 @@
 Copyright (C) 2012-2015, TomTom International BV. All rights reserved.
 ----
 
-The module speedtools-examples explicitly does not depend on the parent POM of the project.
-This is to simulate using SpeedTools in a stand-alone environment, where you would normally
-depend only on SpeedTools JARs from Nexus, not on the project POM itself.
+This project contains a number of examples of using the TomTom SpeedTools library.
+The SpeedTools library can be found at: 
+`https://github.com/tomtom-international/speedtools`
 
-To run the REST API example, type:
+To run a web-services REST API example built using the SpeedTools library, type:
 
     cd speedtools-examples
     mvn jetty:run
     
-To test the web services, enter the following URL in your web browser:    
+This will start a local HTTP server on port 8080. If port 8080 is in use on your
+system, you may wish to change the value of `maven.jetty.port` in `pom.xml`.
+
+To test this web service, enter the following URL in your web browser:    
     
     http://localhost:8080/example/2/version
     
-Or use a tool like cURL:    
+This should show you the JSON result in your browser, which looks somethings like:
+
+    {"version":"3.0.0"}
+
+Alernatively, you can use a tool like cURL:    
     
     curl -X GET http://localhost:8080/example/2/version
 
-This should produce a JSON object, similar to:
- 
-    {"version":"3.0.0"}
-     
+For more info, scroll down to read more about this example project.
 Have fun!
 
 **Rijn Buve**
 
 *TomTom International BV*
+
+PS. For questions, issues and other remarks, you can contact me via email, or
+send a tweet to **@rijnb**.
 
 # License
 
@@ -44,9 +51,40 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-# Example Source Code
+# Using Git and `.gitignore`
 
-This section clarifies the organation of the example source code.
+It's good practice to set up a personal global `.gitignore` file on your machine which filters a number of files
+on your file systems that you do not wish to submit to the Git repository. You can set up your own global
+`~/.gitignore` file by executing:
+`git config --global core.excludesfile ~/.gitignore`
+
+In general, add the following file types to `~/.gitignore` (each entry should be on a separate line):
+`*.com *.class *.dll *.exe *.o *.so *.log *.sql *.sqlite *.tlog *.epoch *.swp *.hprof *.hprof.index *.releaseBackup *~`
+
+If you're using a Mac, filter:
+`.DS_Store* Thumbs.db`
+
+If you're using IntelliJ IDEA, filter:
+`*.iml *.iws .idea/`
+
+If you're using Eclips, filter:
+`.classpath .project .settings .cache`
+
+If you're using NetBeans, filter: 
+`nb-configuration.xml *.orig`
+
+The local `.gitignore` file in the Git repository itself to reflect those file only that are produced by executing
+regular compile, build or release commands, such as:
+`target/ out/`
+
+# Bug Reports and New Feature Requests
+
+If you encounter any problems with this library, don't hesitate to use the `Issues` session to file your issues.
+Normally, one of our developers should be able to comment on them and fix. 
+
+# Source Code Structure
+
+This section clarifies the organization of the example source code.
 The example source code is organized as follows:
 
     com.tomtom.examples
@@ -319,35 +357,4 @@ Then, in another terminal execute:
     bin/gatling.sh
 
 When the Gatling menu appears, choose option `0` for the first scenario.
-
-# Using Git and `.gitignore`
-
-It's good practice to set up a personal global `.gitignore` file on your machine which filters a number of files
-on your file systems that you do not wish to submit to the Git repository. You can set up your own global
-`~/.gitignore` file by executing:
-`git config --global core.excludesfile ~/.gitignore`
-
-In general, add the following file types to `~/.gitignore` (each entry should be on a separate line):
-`*.com *.class *.dll *.exe *.o *.so *.log *.sql *.sqlite *.tlog *.epoch *.swp *.hprof *.hprof.index *.releaseBackup *~`
-
-If you're using a Mac, filter:
-`.DS_Store* Thumbs.db`
-
-If you're using IntelliJ IDEA, filter:
-`*.iml *.iws .idea/`
-
-If you're using Eclips, filter:
-`.classpath .project .settings .cache`
-
-If you're using NetBeans, filter: 
-`nb-configuration.xml *.orig`
-
-The local `.gitignore` file in the Git repository itself to reflect those file only that are produced by executing
-regular compile, build or release commands, such as:
-`target/ out/`
-
-# Bug Reports and New Feature Requests
-
-If you encounter any problems with this library, don't hesitate to use the `Issues` session to file your issues.
-Normally, one of our developers should be able to comment on them and fix. 
 
