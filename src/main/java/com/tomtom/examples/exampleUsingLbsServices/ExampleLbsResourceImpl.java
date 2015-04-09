@@ -23,7 +23,6 @@ import com.tomtom.speedtools.apivalidation.exceptions.ApiForbiddenException;
 import com.tomtom.speedtools.apivalidation.exceptions.ApiNotFoundException;
 import com.tomtom.speedtools.geometry.GeoPoint;
 import com.tomtom.speedtools.rest.Reactor;
-import com.tomtom.speedtools.rest.ResourceHandler;
 import com.tomtom.speedtools.rest.ResourceProcessor;
 import com.tomtom.speedtools.services.lbs.geocode.GeoCodeEngine;
 import com.tomtom.speedtools.services.lbs.geocode.GeoCodeEngineResponse;
@@ -85,30 +84,25 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
-        processor.process(LOG, response, new ResourceHandler("getTraceMe") {
+        processor.process("getTraceMe", LOG, response, () -> {
 
-            @Nonnull
-            @Override
-            public Future<?> process() {
+            LOG.info("getTraceMe: This is me...");
+            LOG.info("getTraceMe:");
+            LOG.info("getTraceMe: The trace event should show up in the MongoDB database 'trace'");
+            LOG.info("getTraceMe: in collection 'traces'. If MongoDB isn't running you probably");
+            LOG.info("getTraceMe: got a (non-fatal) exception earlier and the trace event will only");
+            LOG.info("getTraceMe: be issued to the logger (like these messages).");
+            LOG.info("getTraceMe:");
+            LOG.info("getTraceMe: Issueing a trace event now...");
 
-                LOG.info("getTraceMe: This is me...");
-                LOG.info("getTraceMe:");
-                LOG.info("getTraceMe: The trace event should show up in the MongoDB database 'trace'");
-                LOG.info("getTraceMe: in collection 'traces'. If MongoDB isn't running you probably");
-                LOG.info("getTraceMe: got a (non-fatal) exception earlier and the trace event will only");
-                LOG.info("getTraceMe: be issued to the logger (like these messages).");
-                LOG.info("getTraceMe:");
-                LOG.info("getTraceMe: Issueing a trace event now...");
+            // Log a tracer call.
+            TRACER.eventThisIsMe("This is me.");
 
-                // Log a tracer call.
-                TRACER.eventThisIsMe("This is me.");
+            // Build the response and return it.
+            response.setResponse(Response.noContent().build());
 
-                // Build the response and return it.
-                response.setResponse(Response.noContent().build());
-
-                // The response is already set within this method body.
-                return Futures.successful(null);
-            }
+            // The response is already set within this method body.
+            return Futures.successful(null);
         });
     }
 
@@ -118,23 +112,17 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
-        processor.process(LOG, response, new ResourceHandler("getGeoCode") {
+        processor.process("getGeoCode", LOG, response, () -> {
+            LOG.info("getGeoCode: query={}", query);
 
-            @Nonnull
-            @Override
-            public Future<?> process() throws Exception {
+            // Execute geocode call. Exceptions will be handled by the 'processor'.
+            final GeoCodeEngineResponse r = geoCodeEngine.query(query);
 
-                LOG.info("getGeoCode: query={}", query);
+            // Build the response and return it.
+            response.setResponse(Response.ok(r).build());
 
-                // Execute geocode call. Exceptions will be handled by the 'processor'.
-                final GeoCodeEngineResponse r = geoCodeEngine.query(query);
-
-                // Build the response and return it.
-                response.setResponse(Response.ok(r).build());
-
-                // The response is already set within this method body.
-                return Futures.successful(null);
-            }
+            // The response is already set within this method body.
+            return Futures.successful(null);
         });
     }
 
@@ -145,54 +133,49 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
-        processor.process(LOG, response, new ResourceHandler("getRoute") {
+        processor.process("getRoute", LOG, response, () -> {
 
-            @Nonnull
-            @Override
-            public Future<?> process() throws Exception {
+            LOG.info("getRoute: from={}, to={}", from, to);
 
-                LOG.info("getRoute: from={}, to={}", from, to);
-
-                // Geocoding "from" query.
-                final GeoCodeEngineResponse listFrom = geoCodeEngine.query(from);
-                if (listFrom.getCount() <= 0) {
-                    throw new ApiNotFoundException();
-                }
-                final GeoCodeEngineResult resFrom = listFrom.getGeoCodeEngineResultList().get(0);
-                final GeoPoint ptFrom = new GeoPoint((double) resFrom.getLatitude(), (double) resFrom.getLongitude());
-
-                // Geocoding "to" query.
-                final GeoCodeEngineResponse listTo = geoCodeEngine.query(to);
-                if (listTo.getCount() <= 0) {
-                    throw new ApiNotFoundException();
-                }
-                final GeoCodeEngineResult resTo = listTo.getGeoCodeEngineResultList().get(0);
-                final GeoPoint ptTo = new GeoPoint((double) resTo.getLatitude(), (double) resTo.getLongitude());
-
-                // Execute routing call. Exceptions will be handled by the 'processor'.
-                final Future<RouteEngineResponse> route = routeEngine.route(ptFrom, ptTo);
-
-                // Map the future once it is available.
-                return route.map(new Mapper<RouteEngineResponse, Void>() {
-                    @Nullable
-                    @Override
-                    public Void checkedApply(@Nullable final RouteEngineResponse parameter) throws Throwable {
-
-                        if (parameter == null) {
-                            LOG.error("getRoute: No response received from LBS");
-
-                            // Probably, the system is reaching its limits.
-                            throw new ApiForbiddenException("No response from LBS");
-                        }
-
-                        // Check whether the request was accepted.
-
-                        // Verification code sent, respond ok.
-                        response.setResponse(Response.ok(parameter).build());
-                        return null;
-                    }
-                }, reactor.getExecutionContext());
+            // Geocoding "from" query.
+            final GeoCodeEngineResponse listFrom = geoCodeEngine.query(from);
+            if (listFrom.getCount() <= 0) {
+                throw new ApiNotFoundException();
             }
+            final GeoCodeEngineResult resFrom = listFrom.getGeoCodeEngineResultList().get(0);
+            final GeoPoint ptFrom = new GeoPoint((double) resFrom.getLatitude(), (double) resFrom.getLongitude());
+
+            // Geocoding "to" query.
+            final GeoCodeEngineResponse listTo = geoCodeEngine.query(to);
+            if (listTo.getCount() <= 0) {
+                throw new ApiNotFoundException();
+            }
+            final GeoCodeEngineResult resTo = listTo.getGeoCodeEngineResultList().get(0);
+            final GeoPoint ptTo = new GeoPoint((double) resTo.getLatitude(), (double) resTo.getLongitude());
+
+            // Execute routing call. Exceptions will be handled by the 'processor'.
+            final Future<RouteEngineResponse> route = routeEngine.route(ptFrom, ptTo);
+
+            // Map the future once it is available.
+            return route.map(new Mapper<RouteEngineResponse, Void>() {
+                @Nullable
+                @Override
+                public Void checkedApply(@Nullable final RouteEngineResponse parameter) throws Throwable {
+
+                    if (parameter == null) {
+                        LOG.error("getRoute: No response received from LBS");
+
+                        // Probably, the system is reaching its limits.
+                        throw new ApiForbiddenException("No response from LBS");
+                    }
+
+                    // Check whether the request was accepted.
+
+                    // Verification code sent, respond ok.
+                    response.setResponse(Response.ok(parameter).build());
+                    return null;
+                }
+            }, reactor.getExecutionContext());
         });
     }
 
@@ -200,11 +183,11 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
      * This local class defines the trace interface. The implementation of this class is provided by the SpeedTools
      * framework, which stores the call as a trace entry in a MongoDB database, together with its parameters and a time
      * stamp.
-     *
+     * <p>
      * The traces can be read back with the SpeedTools framework as well. For playback, the developer may even provided
      * a custom implementation, so events can be replayed in real time (or slower/faster) and actually call real
      * implementations of the Tracer interface.
-     *
+     * <p>
      * This is especially useful for visualizing trace data (where the implementation of the calls create visual
      * representations of the events, for example).
      */

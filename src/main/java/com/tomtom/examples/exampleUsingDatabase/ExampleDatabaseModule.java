@@ -21,12 +21,6 @@ import com.google.inject.Module;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.mongodb.Mongo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nonnull;
-import java.net.UnknownHostException;
-
 import com.tomtom.examples.exampleUsingDatabase.dao.PersonDao;
 import com.tomtom.examples.exampleUsingDatabase.dao.mongodb.PersonDaoMongoDBImpl;
 import com.tomtom.examples.exampleUsingDatabase.dao.mongodb.mappers.MyMapperRegistry;
@@ -34,6 +28,11 @@ import com.tomtom.speedtools.mongodb.MongoConnectionCache;
 import com.tomtom.speedtools.mongodb.MongoDB;
 import com.tomtom.speedtools.mongodb.MongoDBConnectionException;
 import com.tomtom.speedtools.mongodb.mappers.MapperRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Nonnull;
+import java.net.UnknownHostException;
 
 /**
  * This is an example Guice module of how to bind service implementations to their interfaces. This examples binds a
@@ -73,8 +72,8 @@ public class ExampleDatabaseModule implements Module {
     public MongoDB provideMongoDB() {
 
         try {
-            final Mongo mongo = MongoConnectionCache.getMongoDB("localhost:27017", 5000);
-            return getDB(mongo, "example", "", "", "");
+            final Mongo mongo = MongoConnectionCache.getMongoDB("localhost:27017", 5000, "example", "", "");
+            return getDB(mongo, "example", "");
         } catch (final UnknownHostException e) {
             throw new MongoDBConnectionException("Cannot find MongoDB servers", e);
         }
@@ -88,22 +87,15 @@ public class ExampleDatabaseModule implements Module {
      * @param subDatabaseName Sub-database name (for unit tests). If the subdatabase name is empty, the database name is
      *                        used, otherwise the subdatabase name is appended to. Example, database="TEST", subdatabase
      *                        name="texas" would produce "TEST_texas".
-     * @param userName        Username for authentication.
-     * @param password        Password for authentication.
      * @return MongoDB instance.
      * @throws MongoDBConnectionException If something went wrong.
      */
     @Nonnull
     protected MongoDB getDB(@Nonnull final Mongo mongo, @Nonnull final String databaseName,
-                            @Nonnull final String subDatabaseName, @Nonnull final String userName, @Nonnull final String password) {
+                            @Nonnull final String subDatabaseName) {
         assert mongo != null;
         assert databaseName != null;
         assert subDatabaseName != null;
-        assert userName != null;
-        assert password != null;
-
-        // If we are already authenticated and this is the same database, don't authenticate this again.
-        MongoDB.authenticateIfRequired(mongo, databaseName, userName, password);
 
         final MongoDB mongoDb = new MongoDB(mongo.getDB(databaseName), subDatabaseName);
         return mongoDb;

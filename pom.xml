@@ -70,8 +70,11 @@
     <!-- Dependencies on other packages. -->
     <properties>
 
+        <!-- SpeedTools library version. -->
+        <speedtools.version>3.0.2</speedtools.version>
+
         <!-- Java and build properties. -->
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.jetty.port>8080</maven.jetty.port>
@@ -101,9 +104,6 @@
         <log4j.version>1.2.17</log4j.version>
         <resteasy.version>3.0.10.Final</resteasy.version>
         <slf4j.version>1.7.10</slf4j.version>
-
-        <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.0</speedtools.version>
     </properties>
 
     <distributionManagement>
