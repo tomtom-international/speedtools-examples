@@ -16,25 +16,23 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices;
 
+import com.tomtom.examples.ApiConstants;
 import org.jboss.resteasy.annotations.Suspend;
 import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import javax.annotation.Nonnull;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.tomtom.examples.ApiConstants;
-
 /**
  * This example class provides all REST API calls with an Akka Futures based implementation.
  *
  * Requests might in rare exception cases be answered with a HTTP 500 Internal Server Error.
  */
-@Path("/example/2")
+@Path("/")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface FutureBasedResource extends SimpleThreadBasedResource {
@@ -52,7 +50,16 @@ public interface FutureBasedResource extends SimpleThreadBasedResource {
      * @param response Version, {@link com.tomtom.examples.exampleCreatingScalableServices.binders.VersionBinder}.
      */
     @GET
-    @Path("version")
+    @Path("example/2/version")
     void getVersion(
+            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+
+    @GET
+    @Path("favicon.ico")
+    void getFavicon(
+            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+
+    @GET
+    void getRoot(
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
 }
