@@ -17,6 +17,8 @@
 package com.tomtom.examples.exampleCreatingScalableServices.binders;
 
 import com.tomtom.speedtools.apivalidation.ApiDataBinder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -78,5 +80,17 @@ public final class IdBinders extends ApiDataBinder {
     public void setIdBinders(@Nullable final Set<IdBinder> idBinders) {
         beforeSet();
         this.idBinders = idBinders;
+    }
+
+
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj, false);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, false);
     }
 }

@@ -91,7 +91,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
         processor.process("getPersons", LOG, response, () -> {
 
             final List<Person> list = personDao.getPersons();
-            final List<PersonBinder> result = new ArrayList<PersonBinder>();
+            final List<PersonBinder> result = new ArrayList<>();
             for (final Person p : list) {
                 final PersonBinder binder = PersonConverter.fromDomain(p);
                 binder.validate();
@@ -117,7 +117,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
             if (!Uid.isValid(personId)) {
                 throw new ApiUidSyntaxException("personId", personId);
             }
-            final Uid<Person> personUid = new Uid<Person>(personId);
+            final Uid<Person> personUid = new Uid<>(personId);
             @Nullable final Person person = personDao.getPerson(personUid);
 
             if (person == null) {
@@ -185,7 +185,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
             if (!Uid.isValid(personId)) {
                 throw new ApiUidSyntaxException("personId", personId);
             }
-            final Uid<Person> personUid = new Uid<Person>(personId);
+            final Uid<Person> personUid = new Uid<>(personId);
 
             // Output a debug log statement which uses logId() to display a human-readable name if it exists.
             LOG.debug("removePerson: personId={}", logId(personId));

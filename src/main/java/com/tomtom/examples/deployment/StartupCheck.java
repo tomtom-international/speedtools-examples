@@ -33,6 +33,7 @@ import java.nio.charset.Charset;
  * will not continue to run. This prevents starting the system with, for example, incorrect database information or an
  * incompatible JRE.
  */
+@SuppressWarnings({"UtilityClassWithoutPrivateConstructor", "UtilityClassWithPublicConstructor"})
 public class StartupCheck {
     private static final Logger LOG = LoggerFactory.getLogger(StartupCheck.class);
 

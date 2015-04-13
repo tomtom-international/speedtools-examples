@@ -41,7 +41,7 @@ public final class SimulatedBusyDatabase {
         super();
 
         // Create a sample data store with entries. Note that this class is a singleton.
-        this.map = new ConcurrentHashMap<Uid<Person>, Person>();
+        this.map = new ConcurrentHashMap<>();
         final Uid<Person> id1 = Uid.fromString("1-1-1-1-1").as(Person.class);
         this.map.put(id1, new Person(id1, "User 1", 30));
         final Uid<Person> id2 = Uid.fromString("1-1-1-1-2").as(Person.class);
