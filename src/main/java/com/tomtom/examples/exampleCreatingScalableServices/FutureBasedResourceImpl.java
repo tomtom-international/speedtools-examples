@@ -119,6 +119,24 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
     }
 
     @Override
+    public void getFavicon(
+            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+        assert response != null;
+
+        processor.process("getFavicon", LOG, response, () -> {
+            response.setResponse(Response.noContent().build());
+            return Futures.successful(null);
+        });
+    }
+
+    @Override
+    public void getRoot(
+            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+        assert response != null;
+        getVersion(response);
+    }
+
+    @Override
     public void getPersons(
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
