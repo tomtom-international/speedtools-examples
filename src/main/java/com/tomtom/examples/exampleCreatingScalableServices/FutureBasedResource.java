@@ -17,6 +17,7 @@
 package com.tomtom.examples.exampleCreatingScalableServices;
 
 import com.tomtom.examples.ApiConstants;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.VersionDTO;
 import org.jboss.resteasy.annotations.Suspend;
 import org.jboss.resteasy.spi.AsynchronousResponse;
 
@@ -47,7 +48,7 @@ public interface FutureBasedResource extends SimpleThreadBasedResource {
      *
      * Return HTTP status 200.
      *
-     * @param response Version, {@link com.tomtom.examples.exampleCreatingScalableServices.binders.VersionBinder}.
+     * @param response Version, {@link VersionDTO}.
      */
     @GET
     @Path("example/2/version")

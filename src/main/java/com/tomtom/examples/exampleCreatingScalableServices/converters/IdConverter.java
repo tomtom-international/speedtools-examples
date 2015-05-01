@@ -19,7 +19,7 @@ package com.tomtom.examples.exampleCreatingScalableServices.converters;
 import javax.annotation.Nonnull;
 
 import com.tomtom.speedtools.domain.Uid;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.IdBinder;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdDTO;
 
 public final class IdConverter {
 
@@ -35,12 +35,12 @@ public final class IdConverter {
      * @return Binder value.
      */
     @Nonnull
-    public static IdBinder fromDomain(@Nonnull final Uid<?> domain) {
+    public static IdDTO fromDomain(@Nonnull final Uid<?> domain) {
         assert domain != null;
 
         // Trivial conversion.
-        final IdBinder idBinder = new IdBinder(domain.toString());
-        return idBinder;
+        final IdDTO idDTO = new IdDTO(domain.toString());
+        return idDTO;
     }
 
     /**
@@ -50,7 +50,7 @@ public final class IdConverter {
      * @return Domain entity.
      */
     @Nonnull
-    public static Uid<?> toDomain(@Nonnull final IdBinder binder) {
+    public static Uid<?> toDomain(@Nonnull final IdDTO binder) {
         assert binder != null;
 
         // Trivial conversion.

@@ -16,12 +16,12 @@
 
 package com.tomtom.examples.exampleUsingDatabase;
 
+import com.tomtom.examples.exampleCreatingScalableServices.SimpleThreadBasedResource;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import com.tomtom.examples.exampleCreatingScalableServices.SimpleThreadBasedResource;
 
 /**
  * This example class provides a simple call to demonstrate use of the MongDB tracer SpeedTools framework.

@@ -18,7 +18,7 @@ package com.tomtom.examples.exampleUsingDatabase;
 
 import akka.dispatch.Futures;
 import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
 import com.tomtom.examples.exampleUsingDatabase.dao.PersonDao;
@@ -91,9 +91,9 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
         processor.process("getPersons", LOG, response, () -> {
 
             final List<Person> list = personDao.getPersons();
-            final List<PersonBinder> result = new ArrayList<PersonBinder>();
+            final List<PersonDTO> result = new ArrayList<PersonDTO>();
             for (final Person p : list) {
-                final PersonBinder binder = PersonConverter.fromDomain(p);
+                final PersonDTO binder = PersonConverter.fromDomain(p);
                 binder.validate();
                 result.add(binder);
             }
@@ -126,7 +126,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
             LOG.debug("getPerson: personId={}, person={}", personId, person);
 
             // Build response.
-            final PersonBinder binder = PersonConverter.fromDomain(person); // Create the binder.
+            final PersonDTO binder = PersonConverter.fromDomain(person); // Create the binder.
             binder.validate();                                              // And validate it.
             response.setResponse(Response.ok(binder).build());
 
@@ -137,31 +137,31 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
 
     @Override
     public void createPerson(
-            @Nullable final PersonBinder personBinder,
+            @Nullable final PersonDTO personDTO,
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
         processor.process("createPerson", LOG, response, () -> {
 
             // Check input.
-            if (personBinder == null) {
+            if (personDTO == null) {
                 throw new ApiParameterMissingException("person");
             }
-            assert personBinder != null;
-            if (personBinder.getId() != null) {
+            assert personDTO != null;
+            if (personDTO.getId() != null) {
                 throw new ApiInvalidParameterCombinationException("id");
             }
-            assert personBinder.getId() == null;
+            assert personDTO.getId() == null;
 
             // Create a new person ID on-the-fly.
-            @Nonnull final Person person = PersonConverter.toDomain(personBinder);
+            @Nonnull final Person person = PersonConverter.toDomain(personDTO);
 
             // Issue a log statement and store a human readable name for this new entity in logId().
             LOG.debug("createPerson: personId={}", logId(person.getId(), person.getName()));
             personDao.storePerson(person);
 
             // Create the response and validate it.
-            @Nonnull final PersonBinder binder = PersonConverter.fromDomain(person);    // Create binder
+            @Nonnull final PersonDTO binder = PersonConverter.fromDomain(person);    // Create binder
             binder.validate();                                                          // And validate.
 
             // Build the response and return it.

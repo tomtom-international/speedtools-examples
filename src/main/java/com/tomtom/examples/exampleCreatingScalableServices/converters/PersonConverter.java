@@ -19,7 +19,7 @@ package com.tomtom.examples.exampleCreatingScalableServices.converters;
 import javax.annotation.Nonnull;
 
 import com.tomtom.speedtools.domain.Uid;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
 
 /**
@@ -40,15 +40,15 @@ public final class PersonConverter {
      * @return Binder value.
      */
     @Nonnull
-    public static PersonBinder fromDomain(@Nonnull final Person domain) {
+    public static PersonDTO fromDomain(@Nonnull final Person domain) {
         assert domain != null;
 
         // Trivial conversion.
-        final PersonBinder personBinder = new PersonBinder(
+        final PersonDTO personDTO = new PersonDTO(
                 domain.getId().toString(),
                 domain.getName(),
                 domain.getAge());
-        return personBinder;
+        return personDTO;
     }
 
     /**
@@ -58,7 +58,7 @@ public final class PersonConverter {
      * @return Domain entity.
      */
     @Nonnull
-    public static Person toDomain(@Nonnull final PersonBinder binder) {
+    public static Person toDomain(@Nonnull final PersonDTO binder) {
         assert binder != null;
 
         // Trivial conversion.

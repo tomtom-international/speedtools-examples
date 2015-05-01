@@ -32,7 +32,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 
 /**
  * This class provides all REST API calls with a standard Thread based implementation.
@@ -51,7 +51,7 @@ public interface SimpleThreadBasedResource {
      *
      * HTTP 200: The person records were successfully retrieved.
      *
-     * @param response Person, {@link com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder}.
+     * @param response Person, {@link PersonDTO}.
      */
     @GET
     @Path("person")
@@ -66,7 +66,7 @@ public interface SimpleThreadBasedResource {
      * HTTP 404: The person record was not found.
      *
      * @param personId Person to be retrieved from database.
-     * @param response Person, {@link com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder}.
+     * @param response Person, {@link PersonDTO}.
      */
     @GET
     @Path("person/{" + PARAM_PERSON_ID + '}')
@@ -80,13 +80,13 @@ public interface SimpleThreadBasedResource {
      *
      * HTTP 200: The person record was successfully created.
      *
-     * @param personBinder Person to be created in database. Must not contain "id" field.
-     * @param response     New record, {@link com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder}.
+     * @param personDTO Person to be created in database. Must not contain "id" field.
+     * @param response     New record, {@link PersonDTO}.
      */
     @POST
     @Path("person")
     void createPerson(
-            @Nullable PersonBinder personBinder,
+            @Nullable PersonDTO personDTO,
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
 
     /**

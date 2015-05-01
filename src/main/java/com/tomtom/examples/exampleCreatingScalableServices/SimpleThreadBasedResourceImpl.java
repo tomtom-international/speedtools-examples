@@ -17,9 +17,9 @@
 package com.tomtom.examples.exampleCreatingScalableServices;
 
 import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.IdBinder;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.IdBinders;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdsDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.IdConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
@@ -70,16 +70,16 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
-        @Nonnull final Set<IdBinder> idBinders = new HashSet<IdBinder>();
+        @Nonnull final Set<IdDTO> idDTOs = new HashSet<IdDTO>();
         final Enumeration<Uid<Person>> e = db.keys();
         while (e.hasMoreElements()) {
-            @Nonnull final IdBinder idBinder = IdConverter.fromDomain(e.nextElement());
-            idBinders.add(idBinder);
+            @Nonnull final IdDTO idDTO = IdConverter.fromDomain(e.nextElement());
+            idDTOs.add(idDTO);
         }
 
         // Build response.
-        LOG.debug("getPersons: idBinders={}", idBinders);
-        @Nonnull final IdBinders binder = new IdBinders(idBinders);
+        LOG.debug("getPersons: idBinders={}", idDTOs);
+        @Nonnull final IdsDTO binder = new IdsDTO(idDTOs);
         binder.validate();
         response.setResponse(Response.ok(binder).build());
     }
@@ -104,29 +104,29 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         }
 
         // Build response.
-        final PersonBinder binder = PersonConverter.fromDomain(person);
+        final PersonDTO binder = PersonConverter.fromDomain(person);
         binder.validate();
         response.setResponse(Response.ok(binder).build());
     }
 
     @Override
     public void createPerson(
-            @Nullable final PersonBinder personBinder,
+            @Nullable final PersonDTO personDTO,
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
         // Check input.
-        if (personBinder == null) {
+        if (personDTO == null) {
             throw new ApiParameterMissingException("person");
         }
-        assert personBinder != null;
-        if (personBinder.getId() != null) {
+        assert personDTO != null;
+        if (personDTO.getId() != null) {
             throw new ApiInvalidParameterCombinationException("id");
         }
-        assert personBinder.getId() == null;
+        assert personDTO.getId() == null;
 
         // Create a new person ID on-the-fly.
-        @Nonnull final Person person = PersonConverter.toDomain(personBinder);
+        @Nonnull final Person person = PersonConverter.toDomain(personDTO);
 
         LOG.debug("createPerson: personId={}", person.getId());
         if (db.putIfAbsent(person) != null) {
@@ -134,7 +134,7 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         }
 
         // Create the response and validate it.
-        @Nonnull final PersonBinder binder = PersonConverter.fromDomain(person);
+        @Nonnull final PersonDTO binder = PersonConverter.fromDomain(person);
         binder.validate();
 
         // Build the response and return it.

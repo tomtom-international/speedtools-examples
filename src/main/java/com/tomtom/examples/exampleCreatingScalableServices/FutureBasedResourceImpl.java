@@ -18,10 +18,10 @@ package com.tomtom.examples.exampleCreatingScalableServices;
 
 import akka.dispatch.Futures;
 import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.IdBinder;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.IdBinders;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.PersonBinder;
-import com.tomtom.examples.exampleCreatingScalableServices.binders.VersionBinder;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdsDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.VersionDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.IdConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
@@ -108,7 +108,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
 
             // Create the response binder and validate it (returned objects must also be validated!).
             // Validation errors are automatically caught as exceptions and returned by the framework.
-            final VersionBinder binder = new VersionBinder(pomVersion); // Create a binder.
+            final VersionDTO binder = new VersionDTO(pomVersion); // Create a binder.
             binder.validate();                                          // You must validate it before using it.
 
             // Build the response and return it.
@@ -143,15 +143,15 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
         assert response != null;
 
         processor.process("getPersons", LOG, response, () -> {
-            @Nonnull final Set<IdBinder> idBinders = new HashSet<IdBinder>();
+            @Nonnull final Set<IdDTO> idDTOs = new HashSet<IdDTO>();
             final Enumeration<Uid<Person>> e = db.keys();
             while (e.hasMoreElements()) {
-                @Nonnull final IdBinder idBinder = IdConverter.fromDomain(e.nextElement());
-                idBinders.add(idBinder);
+                @Nonnull final IdDTO idDTO = IdConverter.fromDomain(e.nextElement());
+                idDTOs.add(idDTO);
             }
 
             // Build response.
-            @Nonnull final IdBinders binder = new IdBinders(idBinders); // Create the binder.
+            @Nonnull final IdsDTO binder = new IdsDTO(idDTOs); // Create the binder.
             binder.validate();                                          // And validate it before returning!
             response.setResponse(Response.ok(binder).build());
 
@@ -182,7 +182,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             }
 
             // Build response.
-            final PersonBinder binder = PersonConverter.fromDomain(person); // Create the binder.
+            final PersonDTO binder = PersonConverter.fromDomain(person); // Create the binder.
             binder.validate();                                              // And validate it.
             response.setResponse(Response.ok(binder).build());
 
@@ -193,24 +193,24 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
 
     @Override
     public void createPerson(
-            @Nullable final PersonBinder personBinder,
+            @Nullable final PersonDTO personDTO,
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
         processor.process("createPerson", LOG, response, () -> {
 
             // Check input.
-            if (personBinder == null) {
+            if (personDTO == null) {
                 throw new ApiParameterMissingException("person");
             }
-            assert personBinder != null;
-            if (personBinder.getId() != null) {
+            assert personDTO != null;
+            if (personDTO.getId() != null) {
                 throw new ApiInvalidParameterCombinationException("id");
             }
-            assert personBinder.getId() == null;
+            assert personDTO.getId() == null;
 
             // Create a new person ID on-the-fly.
-            @Nonnull final Person person = PersonConverter.toDomain(personBinder);
+            @Nonnull final Person person = PersonConverter.toDomain(personDTO);
 
             LOG.debug("createPerson: personId={}", person.getId());
             if (db.putIfAbsent(person) != null) {
@@ -218,7 +218,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             }
 
             // Create the response and validate it.
-            @Nonnull final PersonBinder binder = PersonConverter.fromDomain(person);    // Create binder
+            @Nonnull final PersonDTO binder = PersonConverter.fromDomain(person);    // Create binder
             binder.validate();                                                          // And validate.
 
             // Build the response and return it.
