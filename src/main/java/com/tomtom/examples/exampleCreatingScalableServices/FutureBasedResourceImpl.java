@@ -25,7 +25,6 @@ import com.tomtom.examples.exampleCreatingScalableServices.dto.VersionDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.IdConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
-import com.tomtom.examples.exampleUsingLbsServices.ExampleLbsResourceImpl;
 import com.tomtom.speedtools.apivalidation.exceptions.*;
 import com.tomtom.speedtools.domain.Uid;
 import com.tomtom.speedtools.maven.MavenProperties;
@@ -48,7 +47,7 @@ import java.util.Set;
  * This class implements the REST API resources using the SpeedTools framework.
  */
 public class FutureBasedResourceImpl implements FutureBasedResource {
-    private static final Logger LOG = LoggerFactory.getLogger(ExampleLbsResourceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FutureBasedResourceImpl.class);
 
     @Nonnull
     private final ResourceProcessor processor;
@@ -173,7 +172,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             if (!Uid.isValid(personId)) {
                 throw new ApiUidSyntaxException("personId", personId);
             }
-            final Uid<Person> personUid = new Uid<Person>(personId);
+            final Uid<Person> personUid = new Uid<>(personId);
             @Nullable final Person person = db.get(personUid);
 
             LOG.debug("getPerson: personId={}, person={}", personId, person);
@@ -242,7 +241,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             if (!Uid.isValid(personId)) {
                 throw new ApiUidSyntaxException("personId", personId);
             }
-            final Uid<Person> personUid = new Uid<Person>(personId);
+            final Uid<Person> personUid = new Uid<>(personId);
             @Nullable final Person person = db.remove(personUid);
 
             LOG.debug("removePerson: personId={}, person={}", personId, person);

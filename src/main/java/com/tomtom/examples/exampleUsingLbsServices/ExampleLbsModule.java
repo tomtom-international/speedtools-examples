@@ -32,10 +32,6 @@ import javax.annotation.Nonnull;
 public class ExampleLbsModule implements Module {
     private static final Logger LOG = LoggerFactory.getLogger(ExampleLbsModule.class);
 
-    public ExampleLbsModule() {
-        super();
-    }
-
     @Override
     public void configure(@Nonnull final Binder binder) {
         assert binder != null;

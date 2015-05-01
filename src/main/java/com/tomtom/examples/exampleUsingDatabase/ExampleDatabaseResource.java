@@ -24,7 +24,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * This example class provides a simple call to demonstrate use of the MongDB tracer SpeedTools framework.
+ * This example class provides a simple call to demonstrate use of the MongoDB tracer SpeedTools framework.
  *
  * For documentation, see {@link com.tomtom.examples.exampleCreatingScalableServices.FutureBasedResource}.
  */

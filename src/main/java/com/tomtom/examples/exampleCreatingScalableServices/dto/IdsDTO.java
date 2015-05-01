@@ -17,6 +17,9 @@
 package com.tomtom.examples.exampleCreatingScalableServices.dto;
 
 import com.tomtom.speedtools.apivalidation.ApiDTO;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -78,5 +81,22 @@ public final class IdsDTO extends ApiDTO {
     public void setIdDTOs(@Nullable final Set<IdDTO> idDTOs) {
         beforeSet();
         this.idDTOs = idDTOs;
+    }
+
+
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj, false);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, false);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

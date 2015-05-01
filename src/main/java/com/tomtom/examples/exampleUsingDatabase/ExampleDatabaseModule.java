@@ -42,10 +42,6 @@ import java.net.UnknownHostException;
 public class ExampleDatabaseModule implements Module {
     private static final Logger LOG = LoggerFactory.getLogger(ExampleDatabaseModule.class);
 
-    public ExampleDatabaseModule() {
-        super();
-    }
-
     @Override
     public void configure(@Nonnull final Binder binder) {
         assert binder != null;

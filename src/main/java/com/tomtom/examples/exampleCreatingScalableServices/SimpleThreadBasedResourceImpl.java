@@ -95,7 +95,7 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         if (!Uid.isValid(personId)) {
             throw new ApiUidSyntaxException("personId", personId);
         }
-        final Uid<Person> personUid = new Uid<Person>(personId);
+        final Uid<Person> personUid = new Uid<>(personId);
         @Nullable final Person person = db.get(personUid);
 
         LOG.debug("getPerson: personId={}, person={}", personId, person);
@@ -152,7 +152,7 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         if (!Uid.isValid(personId)) {
             throw new ApiUidSyntaxException("personId", personId);
         }
-        final Uid<Person> personUid = new Uid<Person>(personId);
+        final Uid<Person> personUid = new Uid<>(personId);
         @Nullable final Person person = db.remove(personUid);
 
         LOG.debug("removePerson: personId={}, person={}", personId, person);

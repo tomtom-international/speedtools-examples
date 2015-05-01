@@ -65,7 +65,7 @@ public final class PersonConverter {
         final String id = binder.getId();
 
         return new Person(
-                (id == null) ? new Uid<Person>() : Uid.fromString(id).as(Person.class),
+                (id == null) ? new Uid<>() : Uid.fromString(id).as(Person.class),
                 binder.getName(),
                 binder.getAge());
     }

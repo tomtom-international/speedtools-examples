@@ -16,14 +16,16 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.dto;
 
-import javax.annotation.Nullable;
+import com.tomtom.speedtools.apivalidation.ApiDTO;
+import com.tomtom.speedtools.utils.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-
-import com.tomtom.speedtools.apivalidation.ApiDTO;
-import com.tomtom.speedtools.utils.StringUtils;
 
 /**
  * This class contains a binder for IDs. For an explanation of the use of the SpeedTools framework in
@@ -66,5 +68,21 @@ public final class IdDTO extends ApiDTO {
     public void setId(@Nullable final String id) {
         beforeSet();
         this.id = StringUtils.trim(id);
+    }
+
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj, false);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, false);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }
