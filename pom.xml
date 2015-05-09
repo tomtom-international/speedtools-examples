@@ -70,9 +70,6 @@
     <!-- Dependencies on other packages. -->
     <properties>
 
-        <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.7</speedtools.version>
-
         <!-- Java and build properties. -->
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -88,6 +85,9 @@
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
         <maven-war-plugin.version>2.3</maven-war-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.5</nexus-staging-maven-plugin.version>
+
+        <!-- SpeedTools library version. -->
+        <speedtools.version>3.0.8</speedtools.version>
 
         <!-- Library versions. -->
         <akka.version>2.3.9</akka.version>
@@ -217,6 +217,14 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <!-- Let Maven change these files, to enter POM version and such. -->
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>
