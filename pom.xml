@@ -87,7 +87,7 @@
         <nexus-staging-maven-plugin.version>1.6.5</nexus-staging-maven-plugin.version>
 
         <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.8</speedtools.version>
+        <speedtools.version>3.0.9</speedtools.version>
 
         <!-- Library versions. -->
         <akka.version>2.3.9</akka.version>
