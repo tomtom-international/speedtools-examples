@@ -357,4 +357,3 @@ Then, in another terminal execute:
     bin/gatling.sh
 
 When the Gatling menu appears, choose option `0` for the first scenario.
-
