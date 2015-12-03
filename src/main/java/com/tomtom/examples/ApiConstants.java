@@ -16,9 +16,8 @@
 
 package com.tomtom.examples;
 
-import org.joda.time.DateTime;
-
 import com.tomtom.speedtools.geometry.Geo;
+import org.joda.time.DateTime;
 
 /**
  * This utility class contains constants used in the Web services API.

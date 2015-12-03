@@ -61,7 +61,7 @@ public interface PersonDao {
      * Gets all persons.
      *
      * @return List of {@link Person} instances.
-     * @throws InternalDaoException    When entity could not be read.
+     * @throws InternalDaoException When entity could not be read.
      */
     @Nonnull
     List<Person> getPersons() throws InternalDaoException;

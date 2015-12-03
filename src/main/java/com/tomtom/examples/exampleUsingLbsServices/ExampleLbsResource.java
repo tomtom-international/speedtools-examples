@@ -58,7 +58,7 @@ public interface ExampleLbsResource {
     /**
      * This call executes a geocoding call to TomTom LBS.
      *
-     * @param query Query.
+     * @param query    Query.
      * @param response See {@link com.tomtom.speedtools.services.lbs.geocode.GeoCodeEngineResponse}.
      */
     @GET
@@ -70,8 +70,8 @@ public interface ExampleLbsResource {
     /**
      * This call executes a geocoding call to TomTom LBS.
      *
-     * @param from From.
-     * @param to To.
+     * @param from     From.
+     * @param to       To.
      * @param response See {@link com.tomtom.speedtools.services.lbs.route.RouteEngineResponse}.
      */
     @GET

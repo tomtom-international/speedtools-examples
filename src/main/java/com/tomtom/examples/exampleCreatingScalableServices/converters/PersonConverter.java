@@ -16,11 +16,11 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.converters;
 
-import javax.annotation.Nonnull;
-
-import com.tomtom.speedtools.domain.Uid;
-import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
+import com.tomtom.speedtools.domain.Uid;
+
+import javax.annotation.Nonnull;
 
 /**
  * Converters are used to convert "binder" values (used in APIs) to "domain" classes (used in the application). The

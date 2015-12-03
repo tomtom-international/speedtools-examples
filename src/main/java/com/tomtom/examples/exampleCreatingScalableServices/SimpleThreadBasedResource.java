@@ -16,23 +16,15 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices;
 
+import com.tomtom.examples.ApiConstants;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import org.jboss.resteasy.annotations.Suspend;
 import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
-import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 
 /**
  * This class provides all REST API calls with a standard Thread based implementation.
@@ -81,7 +73,7 @@ public interface SimpleThreadBasedResource {
      * HTTP 200: The person record was successfully created.
      *
      * @param personDTO Person to be created in database. Must not contain "id" field.
-     * @param response     New record, {@link PersonDTO}.
+     * @param response  New record, {@link PersonDTO}.
      */
     @POST
     @Path("person")

@@ -16,10 +16,10 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.converters;
 
-import javax.annotation.Nonnull;
-
-import com.tomtom.speedtools.domain.Uid;
 import com.tomtom.examples.exampleCreatingScalableServices.dto.IdDTO;
+import com.tomtom.speedtools.domain.Uid;
+
+import javax.annotation.Nonnull;
 
 public final class IdConverter {
 

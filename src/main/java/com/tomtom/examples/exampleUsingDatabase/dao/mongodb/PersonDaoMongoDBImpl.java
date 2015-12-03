@@ -17,27 +17,18 @@
 package com.tomtom.examples.exampleUsingDatabase.dao.mongodb;
 
 import com.mongodb.DBCollection;
-
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
-import java.util.List;
-
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
 import com.tomtom.examples.exampleUsingDatabase.dao.PersonDao;
 import com.tomtom.examples.exampleUsingDatabase.dao.mongodb.mappers.PersonMapper;
 import com.tomtom.speedtools.domain.Uid;
-import com.tomtom.speedtools.mongodb.DaoUtils;
-import com.tomtom.speedtools.mongodb.EntityNotFoundException;
-import com.tomtom.speedtools.mongodb.EntityRemoveException;
-import com.tomtom.speedtools.mongodb.EntityStoreException;
-import com.tomtom.speedtools.mongodb.InternalDaoException;
-import com.tomtom.speedtools.mongodb.MongoDB;
-import com.tomtom.speedtools.mongodb.MongoDBQuery;
+import com.tomtom.speedtools.mongodb.*;
 import com.tomtom.speedtools.mongodb.mappers.MapperRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Nonnull;
+import javax.inject.Inject;
+import java.util.List;
 
 import static com.tomtom.speedtools.loghelper.LogHelper.logId;
 

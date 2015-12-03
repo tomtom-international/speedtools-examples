@@ -18,9 +18,9 @@ package com.tomtom.examples.exampleUsingDatabase;
 
 import akka.dispatch.Futures;
 import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleUsingDatabase.dao.PersonDao;
 import com.tomtom.speedtools.apivalidation.exceptions.ApiInvalidParameterCombinationException;
 import com.tomtom.speedtools.apivalidation.exceptions.ApiNotFoundException;

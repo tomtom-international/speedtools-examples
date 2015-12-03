@@ -16,6 +16,8 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices;
 
+import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
+import com.tomtom.speedtools.domain.Uid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +25,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
-import com.tomtom.speedtools.domain.Uid;
 
 /**
  * This simple class acts as if it was a busy, slow database (see busy loop in {@link #doHardTask()}).

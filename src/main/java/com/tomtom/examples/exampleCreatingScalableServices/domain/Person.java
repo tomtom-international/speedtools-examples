@@ -16,10 +16,10 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.domain;
 
+import com.tomtom.speedtools.domain.Uid;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import com.tomtom.speedtools.domain.Uid;
 
 /**
  * This is an example of a domain class. Domain classes are not used directly in APIs. They are converted to "binders"

@@ -17,23 +17,7 @@
 package com.tomtom.examples.exampleUsingDatabase.dao.mongodb.mappers;
 
 
-import com.tomtom.speedtools.mongodb.mappers.BooleanMapper;
-import com.tomtom.speedtools.mongodb.mappers.CurrencyMapper;
-import com.tomtom.speedtools.mongodb.mappers.DateTimeMapper;
-import com.tomtom.speedtools.mongodb.mappers.DoubleMapper;
-import com.tomtom.speedtools.mongodb.mappers.GeoAreaMapper;
-import com.tomtom.speedtools.mongodb.mappers.GeoPointMapper;
-import com.tomtom.speedtools.mongodb.mappers.GeoRectangleMapper;
-import com.tomtom.speedtools.mongodb.mappers.GpsTraceMapper;
-import com.tomtom.speedtools.mongodb.mappers.GpsTracePointMapper;
-import com.tomtom.speedtools.mongodb.mappers.IntegerMapper;
-import com.tomtom.speedtools.mongodb.mappers.LocaleMapper;
-import com.tomtom.speedtools.mongodb.mappers.LongMapper;
-import com.tomtom.speedtools.mongodb.mappers.MapperRegistry;
-import com.tomtom.speedtools.mongodb.mappers.MoneyMapper;
-import com.tomtom.speedtools.mongodb.mappers.SchemaException;
-import com.tomtom.speedtools.mongodb.mappers.StringMapper;
-import com.tomtom.speedtools.mongodb.mappers.URLMapper;
+import com.tomtom.speedtools.mongodb.mappers.*;
 
 /**
  * An application needs to register all data mappers in a registry. In this example the registry explicitly registers

@@ -17,12 +17,12 @@
 package com.tomtom.examples.exampleCreatingScalableServices;
 
 import com.tomtom.examples.ApiConstants;
-import com.tomtom.examples.exampleCreatingScalableServices.dto.IdDTO;
-import com.tomtom.examples.exampleCreatingScalableServices.dto.IdsDTO;
-import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.IdConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.IdsDTO;
+import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.speedtools.apivalidation.exceptions.*;
 import com.tomtom.speedtools.domain.Uid;
 import org.jboss.resteasy.annotations.Suspend;
