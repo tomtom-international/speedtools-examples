@@ -25,6 +25,6 @@ public class PersonMapper extends EntityMapper<Person> {
     public final EntityType entityType = entityType(Person.class);
 
     public final Field<Uid<Person>> id = idField("getId", CONSTRUCTOR);
-    public final Field<String> name = stringField("name", "getName", CONSTRUCTOR);
+    public final Field<String> name = stringField("name", "getName1", CONSTRUCTOR);
     public final Field<Integer> age = integerField("age", "getAge", CONSTRUCTOR);
 }

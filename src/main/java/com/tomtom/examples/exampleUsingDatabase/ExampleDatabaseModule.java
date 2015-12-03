@@ -67,6 +67,10 @@ public class ExampleDatabaseModule implements Module {
     @Singleton
     public MongoDB provideMongoDB() {
 
+        /**
+         * This method provides the database connection. Normally you would probably inject the hostname,
+         * database, username and password from a properties file in this method.
+         */
         try {
             final Mongo mongo = MongoConnectionCache.getMongoDB("localhost:27017", 5000, "example", "", "");
             return getDB(mongo, "example", "");

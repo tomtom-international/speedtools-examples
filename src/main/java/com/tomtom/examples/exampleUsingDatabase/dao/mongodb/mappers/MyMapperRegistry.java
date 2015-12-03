@@ -28,28 +28,6 @@ public class MyMapperRegistry extends MapperRegistry {
     public MyMapperRegistry() throws SchemaException {
         super();
         register(
-                /**
-                 * From module 'utils':
-                 */
-                new BooleanMapper(),
-                new CurrencyMapper(),
-                new DateTimeMapper(),
-                new DoubleMapper(),
-                new GeoAreaMapper(),
-                new GeoPointMapper(),
-                new GeoRectangleMapper(),
-                new GpsTraceMapper(),
-                new GpsTracePointMapper(),
-                new IntegerMapper(),
-                new LocaleMapper(),
-                new LongMapper(),
-                new MoneyMapper(),
-                new StringMapper(),
-                new URLMapper(),
-
-                /**
-                 * From module 'dao':
-                 */
                 new PersonMapper()
         );
     }
