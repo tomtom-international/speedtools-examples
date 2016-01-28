@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015. TomTom International BV (http://tomtom.com).
+ *  Copyright (C) 2012-2016. TomTom International BV (http://tomtom.com).
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ import java.util.Set;
  * This example class implements the REST API resources using the SpeedTools framework.
  *
  * Note that this implementation does not have the nice flat scaling characteristics as the Akka Futures-based
- * implementation in {@link com.tomtom.examples.exampleCreatingScalableServices.FutureBasedResourceImpl}.
+ * implementation in {@link FutureBasedResourceImpl}.
  */
 public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource {
     private static final Logger LOG = LoggerFactory.getLogger(SimpleThreadBasedResourceImpl.class);
@@ -70,7 +70,7 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
             @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
         assert response != null;
 
-        @Nonnull final Set<IdDTO> idDTOs = new HashSet<IdDTO>();
+        @Nonnull final Set<IdDTO> idDTOs = new HashSet<>();
         final Enumeration<Uid<Person>> e = db.keys();
         while (e.hasMoreElements()) {
             @Nonnull final IdDTO idDTO = IdConverter.fromDomain(e.nextElement());

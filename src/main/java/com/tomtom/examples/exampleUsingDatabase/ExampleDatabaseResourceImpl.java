@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015. TomTom International BV (http://tomtom.com).
+ *  Copyright (C) 2012-2016. TomTom International BV (http://tomtom.com).
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
         processor.process("getPersons", LOG, response, () -> {
 
             final List<Person> list = personDao.getPersons();
-            final List<PersonDTO> result = new ArrayList<PersonDTO>();
+            final List<PersonDTO> result = new ArrayList<>();
             for (final Person p : list) {
                 final PersonDTO binder = PersonConverter.fromDomain(p);
                 binder.validate();

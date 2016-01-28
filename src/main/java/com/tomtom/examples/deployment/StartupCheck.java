@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015. TomTom International BV (http://tomtom.com).
+ *  Copyright (C) 2012-2016. TomTom International BV (http://tomtom.com).
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 
 /**
  * This is an example class of how to safely start up a system. It provides basic checks required before startup is
- * allowed. It is abound as an eager Singleton by Guice in the {@link com.tomtom.examples.deployment.DeploymentModule}
+ * allowed. It is abound as an eager Singleton by Guice in the {@link DeploymentModule}
  * by using "binder.bind(StartupCheck.class).asEagerSingleton()". This means the Singleton is instantiated right away.
  *
  * If any of the checks in the constructor of this class fail, an IllegalStateException is thrown and the application

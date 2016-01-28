@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~  Copyright (C) 2015. TomTom International BV (http://tomtom.com).
+  ~  Copyright (C) 2012-2016. TomTom International BV (http://tomtom.com).
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
   ~  you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.0.12.0</version>
+    <version>3.0.13.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -87,7 +87,7 @@
         <nexus-staging-maven-plugin.version>1.6.6</nexus-staging-maven-plugin.version>
 
         <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.12</speedtools.version>
+        <speedtools.version>3.0.13</speedtools.version>
 
         <!-- Library versions. -->
         <akka.version>2.3.14</akka.version>

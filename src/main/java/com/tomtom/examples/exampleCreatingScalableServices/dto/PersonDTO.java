@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015. TomTom International BV (http://tomtom.com).
+ *  Copyright (C) 2012-2016. TomTom International BV (http://tomtom.com).
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Converting between binders and domain classes is usually done in "converter" classes (package "converters"). The
  * converter provide straightforward toDomain and fromDomain methods.
  *
- * The SpeedTools {@link com.tomtom.speedtools.apivalidation.ApiDTO} class provides a basic framework to define
+ * The SpeedTools {@link ApiDTO} class provides a basic framework to define
  * these binders and to help with the validation of the properties.
  *
  * The validation framework offers a way to collect all validation errors in one go and return a single error document
