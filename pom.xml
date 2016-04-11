@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.0.15.0</version>
+    <version>3.0.17.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -87,7 +87,7 @@
         <nexus-staging-maven-plugin.version>1.6.6</nexus-staging-maven-plugin.version>
 
         <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.15</speedtools.version>
+        <speedtools.version>3.0.17</speedtools.version>
 
         <!-- Library versions. -->
         <akka.version>2.3.14</akka.version>
