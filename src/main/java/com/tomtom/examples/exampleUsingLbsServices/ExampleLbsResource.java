@@ -16,12 +16,10 @@
 
 package com.tomtom.examples.exampleUsingLbsServices;
 
-import com.tomtom.examples.ApiConstants;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
-
 import javax.annotation.Nonnull;
 import javax.ws.rs.*;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -53,7 +51,7 @@ public interface ExampleLbsResource {
     @GET
     @Path("traceme")
     void getTraceMe(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 
     /**
      * This call executes a geocoding call to TomTom LBS.
@@ -65,7 +63,7 @@ public interface ExampleLbsResource {
     @Path("geocode/{" + PARAM_QUERY + '}')
     void getGeoCode(
             @Nonnull @PathParam(PARAM_QUERY) String query,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 
     /**
      * This call executes a geocoding call to TomTom LBS.
@@ -79,5 +77,5 @@ public interface ExampleLbsResource {
     void getRoute(
             @Nonnull @PathParam(PARAM_FROM) String from,
             @Nonnull @PathParam(PARAM_TO) String to,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 }

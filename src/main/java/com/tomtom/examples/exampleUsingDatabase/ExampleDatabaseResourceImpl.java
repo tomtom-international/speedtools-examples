@@ -17,7 +17,6 @@
 package com.tomtom.examples.exampleUsingDatabase;
 
 import akka.dispatch.Futures;
-import com.tomtom.examples.ApiConstants;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
 import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
@@ -29,8 +28,6 @@ import com.tomtom.speedtools.apivalidation.exceptions.ApiUidSyntaxException;
 import com.tomtom.speedtools.domain.Uid;
 import com.tomtom.speedtools.mongodb.EntityStoreException;
 import com.tomtom.speedtools.rest.ResourceProcessor;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +35,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +84,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
 
     @Override
     public void getPersons(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("getPersons", LOG, response, () -> {
@@ -97,7 +96,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
                 binder.validate();
                 result.add(binder);
             }
-            response.setResponse(Response.ok(result).build());
+            response.resume(Response.ok(result).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -107,7 +106,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
     @Override
     public void getPerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) final String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert personId != null;
         assert response != null;
 
@@ -128,7 +127,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
             // Build response.
             final PersonDTO binder = PersonConverter.fromDomain(person); // Create the binder.
             binder.validate();                                              // And validate it.
-            response.setResponse(Response.ok(binder).build());
+            response.resume(Response.ok(binder).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -138,7 +137,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
     @Override
     public void createPerson(
             @Nullable final PersonDTO personDTO,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("createPerson", LOG, response, () -> {
@@ -165,7 +164,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
             binder.validate();                                                          // And validate.
 
             // Build the response and return it.
-            response.setResponse(Response.ok(binder).build());
+            response.resume(Response.ok(binder).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -175,7 +174,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
     @Override
     public void removePerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) final String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert personId != null;
         assert response != null;
 
@@ -200,7 +199,7 @@ public class ExampleDatabaseResourceImpl implements ExampleDatabaseResource {
             }
 
             // Build a "204 (NO CONTENT)" response. No binders required.
-            response.setResponse(Response.noContent().build());
+            response.resume(Response.noContent().build());
 
             // The response is already set within this method body.
             return Futures.successful(null);

@@ -17,7 +17,6 @@
 package com.tomtom.examples.exampleCreatingScalableServices;
 
 import akka.dispatch.Futures;
-import com.tomtom.examples.ApiConstants;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.IdConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
@@ -29,8 +28,6 @@ import com.tomtom.speedtools.apivalidation.exceptions.*;
 import com.tomtom.speedtools.domain.Uid;
 import com.tomtom.speedtools.maven.MavenProperties;
 import com.tomtom.speedtools.rest.ResourceProcessor;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +35,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -88,7 +87,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
      */
     @Override
     public void getVersion(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         /**
@@ -111,7 +110,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             binder.validate();                                          // You must validate it before using it.
 
             // Build the response and return it.
-            response.setResponse(Response.ok(binder).build());
+            response.resume(Response.ok(binder).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -120,25 +119,25 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
 
     @Override
     public void getFavicon(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("getFavicon", LOG, response, () -> {
-            response.setResponse(Response.noContent().build());
+            response.resume(Response.noContent().build());
             return Futures.successful(null);
         });
     }
 
     @Override
     public void getRoot(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
         getVersion(response);
     }
 
     @Override
     public void getPersons(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("getPersons", LOG, response, () -> {
@@ -152,7 +151,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             // Build response.
             @Nonnull final IdsDTO binder = new IdsDTO(idDTOs); // Create the binder.
             binder.validate();                                          // And validate it before returning!
-            response.setResponse(Response.ok(binder).build());
+            response.resume(Response.ok(binder).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -162,7 +161,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
     @Override
     public void getPerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) final String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert personId != null;
         assert response != null;
 
@@ -183,7 +182,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             // Build response.
             final PersonDTO binder = PersonConverter.fromDomain(person); // Create the binder.
             binder.validate();                                              // And validate it.
-            response.setResponse(Response.ok(binder).build());
+            response.resume(Response.ok(binder).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -193,7 +192,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
     @Override
     public void createPerson(
             @Nullable final PersonDTO personDTO,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("createPerson", LOG, response, () -> {
@@ -221,7 +220,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             binder.validate();                                                          // And validate.
 
             // Build the response and return it.
-            response.setResponse(Response.ok(binder).build());
+            response.resume(Response.ok(binder).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -231,7 +230,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
     @Override
     public void removePerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) final String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert personId != null;
         assert response != null;
 
@@ -250,7 +249,7 @@ public class FutureBasedResourceImpl implements FutureBasedResource {
             }
 
             // Build a "204 (NO CONTENT)" response. No binders required.
-            response.setResponse(Response.noContent().build());
+            response.resume(Response.noContent().build());
 
             // The response is already set within this method body.
             return Futures.successful(null);

@@ -3,6 +3,19 @@
 Copyright (C) 2012-2015, TomTom International BV. All rights reserved.
 ----
 
+## Important Notice
+
+Rather than looking at this example project on how to use the SpeedTools library,
+we now recommend you to have a look at a production-ready project for Mapcode REST services
+at: https://github.com/mapcode-foundation/mapcode-rest-service
+
+That project uses SpeedTools in a production environment and is always kept up-to-date.
+
+## Original Documentation
+
+**Disclaimer:** Some of the examples may be lagging behind the actual implementation 
+of the SpeedTools library. 
+
 This project contains a number of examples of using the TomTom SpeedTools library.
 The SpeedTools library can be found at: 
 `https://github.com/tomtom-international/speedtools`

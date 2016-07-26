@@ -16,16 +16,15 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices;
 
-import com.tomtom.examples.ApiConstants;
 import com.tomtom.examples.exampleCreatingScalableServices.dto.VersionDTO;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import javax.annotation.Nonnull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -52,7 +51,7 @@ public interface FutureBasedResource extends SimpleThreadBasedResource {
      */
     @GET
     @Path("example/2/version")
-    void getVersion(@Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+    void getVersion(@Suspended @Nonnull AsyncResponse response);
 
     /**
      * Add implementation of returning a favicon.
@@ -61,7 +60,7 @@ public interface FutureBasedResource extends SimpleThreadBasedResource {
      */
     @GET
     @Path("favicon.ico")
-    void getFavicon(@Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+    void getFavicon(@Suspended @Nonnull AsyncResponse response);
 
     /**
      * Add implementation of returning something for the root URL.
@@ -69,5 +68,5 @@ public interface FutureBasedResource extends SimpleThreadBasedResource {
      * @param response Root URL response.
      */
     @GET
-    void getRoot(@Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+    void getRoot(@Suspended @Nonnull AsyncResponse response);
 }

@@ -16,14 +16,13 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices;
 
-import com.tomtom.examples.ApiConstants;
 import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.ws.rs.*;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -48,7 +47,7 @@ public interface SimpleThreadBasedResource {
     @GET
     @Path("person")
     void getPersons(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 
     /**
      * This method gets an existing Person record.
@@ -64,7 +63,7 @@ public interface SimpleThreadBasedResource {
     @Path("person/{" + PARAM_PERSON_ID + '}')
     void getPerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 
     /**
      * This method creates a new Person record. The ID should not be specified in the personBinder (considered an
@@ -79,7 +78,7 @@ public interface SimpleThreadBasedResource {
     @Path("person")
     void createPerson(
             @Nullable PersonDTO personDTO,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 
     /**
      * This method deletes an existing Person record.
@@ -97,5 +96,5 @@ public interface SimpleThreadBasedResource {
     @Path("person/{" + PARAM_PERSON_ID + '}')
     void removePerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) AsynchronousResponse response);
+            @Suspended @Nonnull AsyncResponse response);
 }

@@ -16,6 +16,8 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.tomtom.speedtools.apivalidation.ApiDTO;
 import com.tomtom.speedtools.utils.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -31,7 +33,8 @@ import javax.xml.bind.annotation.XmlElement;
  * This class contains a binder for IDs. For an explanation of the use of the SpeedTools framework in
  * binders, see {@link PersonDTO}.
  */
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@JsonInclude(Include.NON_EMPTY)
+@XmlAccessorType(XmlAccessType.FIELD)
 public final class IdDTO extends ApiDTO {
 
     @Nullable

@@ -17,7 +17,8 @@
 package com.tomtom.examples.exampleUsingDatabase.dao.mongodb.mappers;
 
 
-import com.tomtom.speedtools.mongodb.mappers.*;
+import com.tomtom.speedtools.mongodb.mappers.MapperRegistry;
+import com.tomtom.speedtools.mongodb.mappers.SchemaException;
 
 /**
  * An application needs to register all data mappers in a registry. In this example the registry explicitly registers

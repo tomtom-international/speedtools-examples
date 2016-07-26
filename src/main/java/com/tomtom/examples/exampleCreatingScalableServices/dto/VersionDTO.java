@@ -16,6 +16,8 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.tomtom.examples.ApiConstants;
 import com.tomtom.speedtools.apivalidation.ApiDTO;
 import com.tomtom.speedtools.utils.StringUtils;
@@ -33,8 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * See comments in {@link PersonDTO}.
  */
+@JsonInclude(Include.NON_EMPTY)
 @XmlRootElement(name = "version")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@XmlAccessorType(XmlAccessType.FIELD)
 public final class VersionDTO extends ApiDTO {
 
     @Nullable

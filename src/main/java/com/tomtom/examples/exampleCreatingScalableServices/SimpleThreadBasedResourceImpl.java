@@ -16,7 +16,6 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices;
 
-import com.tomtom.examples.ApiConstants;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.IdConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.converters.PersonConverter;
 import com.tomtom.examples.exampleCreatingScalableServices.domain.Person;
@@ -25,8 +24,6 @@ import com.tomtom.examples.exampleCreatingScalableServices.dto.IdsDTO;
 import com.tomtom.examples.exampleCreatingScalableServices.dto.PersonDTO;
 import com.tomtom.speedtools.apivalidation.exceptions.*;
 import com.tomtom.speedtools.domain.Uid;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +31,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -67,7 +66,7 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
 
     @Override
     public void getPersons(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         @Nonnull final Set<IdDTO> idDTOs = new HashSet<>();
@@ -81,13 +80,13 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         LOG.debug("getPersons: idBinders={}", idDTOs);
         @Nonnull final IdsDTO binder = new IdsDTO(idDTOs);
         binder.validate();
-        response.setResponse(Response.ok(binder).build());
+        response.resume(Response.ok(binder).build());
     }
 
     @Override
     public void getPerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) final String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert personId != null;
         assert response != null;
 
@@ -106,13 +105,13 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         // Build response.
         final PersonDTO binder = PersonConverter.fromDomain(person);
         binder.validate();
-        response.setResponse(Response.ok(binder).build());
+        response.resume(Response.ok(binder).build());
     }
 
     @Override
     public void createPerson(
             @Nullable final PersonDTO personDTO,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         // Check input.
@@ -138,13 +137,13 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         binder.validate();
 
         // Build the response and return it.
-        response.setResponse(Response.ok(binder).build());
+        response.resume(Response.ok(binder).build());
     }
 
     @Override
     public void removePerson(
             @Nonnull @PathParam(PARAM_PERSON_ID) final String personId,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert personId != null;
         assert response != null;
 
@@ -161,6 +160,6 @@ public class SimpleThreadBasedResourceImpl implements SimpleThreadBasedResource 
         }
 
         // Build response.
-        response.setResponse(Response.noContent().build());
+        response.resume(Response.noContent().build());
     }
 }

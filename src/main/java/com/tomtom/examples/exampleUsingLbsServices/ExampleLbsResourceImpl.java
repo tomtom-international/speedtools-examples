@@ -18,7 +18,6 @@ package com.tomtom.examples.exampleUsingLbsServices;
 
 import akka.dispatch.Futures;
 import akka.dispatch.Mapper;
-import com.tomtom.examples.ApiConstants;
 import com.tomtom.speedtools.apivalidation.exceptions.ApiForbiddenException;
 import com.tomtom.speedtools.apivalidation.exceptions.ApiNotFoundException;
 import com.tomtom.speedtools.geometry.GeoPoint;
@@ -31,8 +30,6 @@ import com.tomtom.speedtools.services.lbs.route.RouteEngine;
 import com.tomtom.speedtools.services.lbs.route.RouteEngineResponse;
 import com.tomtom.speedtools.tracer.Traceable;
 import com.tomtom.speedtools.tracer.TracerFactory;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import scala.concurrent.Future;
@@ -41,6 +38,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 
 /**
@@ -81,7 +80,7 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
 
     @Override
     public void getTraceMe(
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("getTraceMe", LOG, response, () -> {
@@ -99,7 +98,7 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
             TRACER.eventThisIsMe("This is me.");
 
             // Build the response and return it.
-            response.setResponse(Response.noContent().build());
+            response.resume(Response.noContent().build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -109,7 +108,7 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
     @Override
     public void getGeoCode(
             @Nonnull @PathParam(PARAM_QUERY) final String query,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("getGeoCode", LOG, response, () -> {
@@ -119,7 +118,7 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
             final GeoCodeEngineResponse r = geoCodeEngine.query(query);
 
             // Build the response and return it.
-            response.setResponse(Response.ok(r).build());
+            response.resume(Response.ok(r).build());
 
             // The response is already set within this method body.
             return Futures.successful(null);
@@ -130,7 +129,7 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
     public void getRoute(
             @Nonnull @PathParam(PARAM_FROM) final String from,
             @Nonnull @PathParam(PARAM_TO) final String to,
-            @Nonnull @Suspend(ApiConstants.SUSPEND_TIMEOUT) final AsynchronousResponse response) {
+            @Suspended @Nonnull final AsyncResponse response) {
         assert response != null;
 
         processor.process("getRoute", LOG, response, () -> {
@@ -172,7 +171,7 @@ public class ExampleLbsResourceImpl implements ExampleLbsResource {
                     // Check whether the request was accepted.
 
                     // Verification code sent, respond ok.
-                    response.setResponse(Response.ok(parameter).build());
+                    response.resume(Response.ok(parameter).build());
                     return null;
                 }
             }, reactor.getExecutionContext());

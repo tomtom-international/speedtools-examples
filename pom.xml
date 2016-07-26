@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.0.20.0</version>
+    <version>3.0.21.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -71,7 +71,7 @@
     <properties>
 
         <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.20</speedtools.version>
+        <speedtools.version>3.0.21</speedtools.version>
 
         <!-- Java and build properties. -->
         <jdk.version>1.8</jdk.version>
@@ -102,7 +102,7 @@
         <jsr305.version>3.0.0</jsr305.version>
         <junit.version>4.10</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <resteasy.version>3.0.12.Final</resteasy.version>
+        <resteasy.version>3.0.18.Final</resteasy.version>
         <slf4j.version>1.7.13</slf4j.version>
     </properties>
 
@@ -361,23 +361,27 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-            <version>${resteasy.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-core-asl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-mapper-asl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-jaxrs</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
@@ -388,6 +392,30 @@
                 <exclusion>
                     <groupId>javax.xml.stream</groupId>
                     <artifactId>stax-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-guice</artifactId>
+            <version>${resteasy.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.guice</groupId>
+                    <artifactId>guice</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -406,44 +434,20 @@
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-            <version>${resteasy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-guice</artifactId>
-            <version>${resteasy.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.code.guice</groupId>
-                    <artifactId>guice</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
             <artifactId>async-http-servlet-3.0</artifactId>
             <version>${resteasy.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>tjws</artifactId>
+            <version>${resteasy.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>${resteasy.version}</version>
         </dependency>
     </dependencies>
 </project>

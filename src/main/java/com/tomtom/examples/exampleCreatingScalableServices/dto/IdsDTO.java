@@ -16,6 +16,8 @@
 
 package com.tomtom.examples.exampleCreatingScalableServices.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.tomtom.speedtools.apivalidation.ApiDTO;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -32,8 +34,9 @@ import java.util.Set;
 /**
  * This class contains a binder for lists IDs.
  */
+@JsonInclude(Include.NON_EMPTY)
 @XmlRootElement(name = "ids")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@XmlAccessorType(XmlAccessType.FIELD)
 public final class IdsDTO extends ApiDTO {
 
     @Nullable
