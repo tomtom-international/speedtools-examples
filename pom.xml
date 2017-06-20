@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.0.26.0</version>
+    <version>3.1.0.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -71,7 +71,7 @@
     <properties>
 
         <!-- SpeedTools library version. -->
-        <speedtools.version>3.0.26</speedtools.version>
+        <speedtools.version>3.1.0</speedtools.version>
 
         <!-- Java and build properties. -->
         <jdk.version>1.8</jdk.version>
@@ -89,7 +89,7 @@
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 
         <!-- Library versions. -->
-        <akka.version>2.3.16</akka.version>
+        <akka.version>2.5.3</akka.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <guava.version>22.0</guava.version>
         <guice.version>4.1.0</guice.version>
@@ -199,13 +199,8 @@
     </build>
 
     <dependencies>
-        <!-- Project dependencies. -->
 
-        <dependency>
-            <groupId>com.tomtom.speedtools</groupId>
-            <artifactId>akka</artifactId>
-            <version>${speedtools.version}</version>
-        </dependency>
+        <!-- Project dependencies. -->
 
         <dependency>
             <groupId>com.tomtom.speedtools</groupId>
@@ -268,6 +263,44 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- External dependencies. -->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.11</artifactId>
+            <version>${akka.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-slf4j_2.11</artifactId>
+            <version>${akka.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
@@ -275,6 +308,18 @@
             <type>jar</type>
             <scope>provided</scope>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
         </dependency>
 
         <dependency>
@@ -291,65 +336,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>${guice.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>${joda-time.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>${jetty.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jndi</artifactId>
-            <version>${jetty.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.10</artifactId>
-            <version>${akka.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-slf4j_2.10</artifactId>
-            <version>${akka.version}</version>
         </dependency>
 
         <dependency>
@@ -360,44 +349,34 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jndi</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
+            <artifactId>async-http-servlet-3.0</artifactId>
             <version>${resteasy.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.xml.stream</groupId>
-                    <artifactId>stax-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
+            <artifactId>resteasy-client</artifactId>
             <version>${resteasy.version}</version>
         </dependency>
 
@@ -433,7 +412,19 @@
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>async-http-servlet-3.0</artifactId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>${resteasy.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.xml.stream</groupId>
+                    <artifactId>stax-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
             <version>${resteasy.version}</version>
         </dependency>
 
@@ -444,9 +435,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <version>${resteasy.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
 </project>
