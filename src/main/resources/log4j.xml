@@ -43,7 +43,7 @@
     </logger>
 
     <!-- The SpeedTools framework. -->
-    <logger name="com.tomtom.speedtools.ttbin">
+    <logger name="com.tomtom.speedtools">
         <level value="debug"/>
     </logger>
 

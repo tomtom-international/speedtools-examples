@@ -50,6 +50,13 @@
     </context-param>
 
     <context-param>
+        <param-name>resteasy.providers</param-name>
+        <param-value>
+            com.tomtom.speedtools.rest.security.CorsFeature
+        </param-value>
+    </context-param>
+
+    <context-param>
         <param-name>resteasy.async.job.service.enabled</param-name>
         <param-value>true</param-value>
     </context-param>
