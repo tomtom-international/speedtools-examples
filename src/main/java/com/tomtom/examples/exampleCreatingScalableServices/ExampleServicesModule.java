@@ -19,9 +19,6 @@ package com.tomtom.examples.exampleCreatingScalableServices;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
-import com.tomtom.examples.exampleCreatingScalableServices.security.AuthenticationServiceImpl;
-import com.tomtom.examples.exampleCreatingScalableServices.security.SecurityInterceptorConfigurer;
-import com.tomtom.speedtools.rest.security.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,16 +36,10 @@ public class ExampleServicesModule implements Module {
     public void configure(@Nonnull final Binder binder) {
         assert binder != null;
 
-        // Bind the authentication service.
-        binder.bind(AuthenticationService.class).to(AuthenticationServiceImpl.class).in(javax.inject.Singleton.class);
-
         // Bind APIs to their implementation.
         binder.bind(FutureBasedResource.class).to(FutureBasedResourceImpl.class).in(Singleton.class);
         binder.bind(SimpleThreadBasedResource.class).to(SimpleThreadBasedResourceImpl.class).in(Singleton.class);
         binder.bind(SimulatedBusyDatabase.class).in(Singleton.class);
-
-        // Bind security interceptor for REST authentication.
-        binder.bind(SecurityInterceptorConfigurer.class).asEagerSingleton();
 
         /**
          * Show some start-up information about this example application.
