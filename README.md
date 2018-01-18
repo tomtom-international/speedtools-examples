@@ -1,6 +1,6 @@
 # Read Me for TomTom SpeedTools Library Examples
 
-Copyright (C) 2012-2017, TomTom International BV. All rights reserved.
+Copyright (C) 2012-2018, TomTom International BV. All rights reserved.
 ----
 
 ## Important Notice
