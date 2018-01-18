@@ -19,13 +19,8 @@ class LoadTestRestApi extends Simulation {
   val scnWarmUp = scenario("Warm-Up").
     exec(http("first-thread").get("/example/1/person").headers(headers)).
     exec(http("first-future").get("/example/2/person").headers(headers))
-
   val scnThread = scenario("Thread").exec(http("thread").get("/example/1/person").headers(headers))
-
   val scnFuture = scenario("Futures").exec(http("future").get("/example/2/person").headers(headers))
-
-  val nrUsers = 1000
-  val rampSecs = 30
 
   setUp(scnWarmUp.inject(atOnceUsers(1)),
     scnThread.inject(nothingFor(10 seconds), rampUsers(500) over (30 seconds)),

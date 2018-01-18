@@ -161,7 +161,7 @@ use the SpeedTools components for REST services.
 
 Build the library and samples by executing:
 
-    cd <SAFERTOOL-HOME>
+    cd <SPEEDTOOLS-HOME>
     mvn clean install
 
 Then, start the REST API server in a Jetty server:

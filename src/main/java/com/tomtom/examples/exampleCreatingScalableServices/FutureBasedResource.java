@@ -32,7 +32,7 @@ import javax.ws.rs.core.MediaType;
  * <p>
  * Requests might in rare exception cases be answered with a HTTP 500 Internal Server Error.
  */
-@Path("/")
+@Path("/example/2")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface FutureBasedResource extends SimpleThreadBasedResource {
@@ -50,7 +50,7 @@ public interface FutureBasedResource extends SimpleThreadBasedResource {
      * @param response Version, {@link VersionDTO}.
      */
     @GET
-    @Path("example/2/version")
+    @Path("version")
     void getVersion(@Suspended @Nonnull AsyncResponse response);
 
     /**

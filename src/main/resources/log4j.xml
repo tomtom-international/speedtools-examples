@@ -39,12 +39,12 @@
 
     <!-- Make sure we get all messages from our own domain. -->
     <logger name="com.tomtom.examples">
-        <level value="debug"/>
+        <level value="info"/>
     </logger>
 
     <!-- The SpeedTools framework. -->
     <logger name="com.tomtom.speedtools">
-        <level value="debug"/>
+        <level value="info"/>
     </logger>
 
     <logger name="com.tomtom.speedtools.ttbin.TTBinStreamInMemory">
