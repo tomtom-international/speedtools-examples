@@ -16,15 +16,20 @@ class LoadTestRestApi extends Simulation {
   val headers = Map(
     "Accept" -> "application/json")
 
-  val scnWarmUp = scenario("Warm-Up").
+  val scenarioWarmUp = scenario("Warm-Up").
     exec(http("first-thread").get("/example/1/person").headers(headers)).
     exec(http("first-future").get("/example/2/person").headers(headers))
-  val scnThread = scenario("Thread").exec(http("thread").get("/example/1/person").headers(headers))
-  val scnFuture = scenario("Futures").exec(http("future").get("/example/2/person").headers(headers))
 
-  setUp(scnWarmUp.inject(atOnceUsers(1)),
-    scnThread.inject(nothingFor(10 seconds), rampUsers(500) over (30 seconds)),
-    scnFuture.inject(nothingFor(90 seconds), rampUsers(500) over (30 seconds))).
+  val scenarioNonAkkaImplementation = scenario("NonAkkaImplementation").
+    exec(http("NonAkkaImplementation").get("/example/1/person").headers(headers))
+
+  val scenarioAkkaImplementation = scenario("AkkaImplementation").
+    exec(http("AkkaImplementation").get("/example/2/person").headers(headers))
+
+  setUp(
+    scenarioWarmUp.inject(atOnceUsers(1)),
+    scenarioAkkaImplementation.inject(nothingFor(10 seconds), rampUsers(5000) over (30 seconds))).
+    //scenarioAkkaImplementation.inject(nothingFor(180 seconds), rampUsers(5000) over (30 seconds))).
     protocols(httpConf).
     assertions(global.successfulRequests.percent.is(100))
 }
