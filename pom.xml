@@ -77,30 +77,28 @@
         <maven.jetty.port>8080</maven.jetty.port>
 
         <!-- Plugin version. -->
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
-        <maven-jetty-plugin.version>8.1.22.v20160922</maven-jetty-plugin.version>
-        <maven-remote-resources-plugin.version>1.5</maven-remote-resources-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+        <maven-jetty-plugin.version>8.1.9.v20130131</maven-jetty-plugin.version>
+        <maven-remote-resources-plugin.version>1.6.0</maven-remote-resources-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 
         <!-- Library versions. -->
-        <akka.version>2.5.6</akka.version>
-        <commons-lang3.version>3.4</commons-lang3.version>
-        <guava.version>23.0</guava.version>
-        <guice.version>4.1.0</guice.version>
-        <jackson.version>2.9.2</jackson.version>
+        <akka.version>2.5.18</akka.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <guava.version>27.0.1-jre</guava.version>
+        <guice.version>4.2.2</guice.version>
+        <jackson.version>2.9.7</jackson.version>
         <javax.inject.version>1</javax.inject.version>
-        <javax.servlet-api.version>4.0.0</javax.servlet-api.version>
-        <jetty.version>8.1.9.v20130131</jetty.version>
-        <joda-time.version>2.9.9</joda-time.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
+        <joda-time.version>2.10.1</joda-time.version>
         <jsr305.version>3.0.2</jsr305.version>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <resteasy.version>3.1.4.Final</resteasy.version>
+        <resteasy.version>3.6.2.Final</resteasy.version>
         <slf4j.version>1.7.25</slf4j.version>
-        <speedtools.version>3.2.7</speedtools.version>
+        <speedtools.version>3.2.12</speedtools.version>
     </properties>
 
     <distributionManagement>
@@ -169,7 +167,7 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
+                <version>${maven-jetty-plugin.version}</version>
                 <configuration>
                     <webApp>
                         <contextPath>/</contextPath>
@@ -355,14 +353,14 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-jndi</artifactId>
-            <version>${jetty.version}</version>
+            <version>${maven-jetty-plugin.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>${jetty.version}</version>
+            <version>${maven-jetty-plugin.version}</version>
             <scope>test</scope>
         </dependency>
 
