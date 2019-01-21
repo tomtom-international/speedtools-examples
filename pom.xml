@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2012-2017. TomTom International BV (http://tomtom.com).
+  ~ Copyright (C) 2012-2019. TomTom NV (http://tomtom.com).
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.2.12</version>
+    <version>3.2.13</version>
 
     <name>SpeedTools Examples</name>
 
@@ -40,7 +40,7 @@
     </description>
 
     <organization>
-        <name>TomTom International BV</name>
+        <name>TomTom NV</name>
         <url>http://tomtom.com</url>
     </organization>
 
@@ -85,11 +85,11 @@
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 
         <!-- Library versions. -->
-        <akka.version>2.5.18</akka.version>
+        <akka.version>2.5.19</akka.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <guava.version>27.0.1-jre</guava.version>
         <guice.version>4.2.2</guice.version>
-        <jackson.version>2.9.7</jackson.version>
+        <jackson.version>2.9.8</jackson.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <joda-time.version>2.10.1</joda-time.version>
@@ -98,7 +98,7 @@
         <log4j.version>1.2.17</log4j.version>
         <resteasy.version>3.6.2.Final</resteasy.version>
         <slf4j.version>1.7.25</slf4j.version>
-        <speedtools.version>3.2.12</speedtools.version>
+        <speedtools.version>3.2.13</speedtools.version>
     </properties>
 
     <distributionManagement>
