@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.2.18.0</version>
+    <version>3.2.19.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -89,16 +89,16 @@
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <guava.version>27.0.1-jre</guava.version>
         <guice.version>4.2.2</guice.version>
-        <jackson.version>2.10.0</jackson.version>
+        <jackson.version>2.10.1</jackson.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <joda-time.version>2.10.1</joda-time.version>
+        <joda-time.version>2.10.5</joda-time.version>
         <jsr305.version>3.0.2</jsr305.version>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <resteasy.version>3.6.2.Final</resteasy.version>
         <slf4j.version>1.7.25</slf4j.version>
-        <speedtools.version>3.2.18</speedtools.version>
+        <speedtools.version>3.2.19</speedtools.version>
     </properties>
 
     <distributionManagement>
