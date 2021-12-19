@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.3.0.0</version>
+    <version>3.4.0.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -86,20 +86,20 @@
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 
         <!-- Library versions. -->
-        <akka-actor_2.13>2.6.16</akka-actor_2.13>
+        <akka-actor_2.13>2.6.17</akka-actor_2.13>
         <commons-lang3.version>3.8.1</commons-lang3.version>
-        <guava.version>30.1.1-jre</guava.version>
+        <guava.version>31.0.1-jre</guava.version>
         <guice.version>4.2.3</guice.version>
-        <jackson.version>2.12.3</jackson.version>
+        <jackson.version>2.13.0</jackson.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <joda-time.version>2.10.10</joda-time.version>
+        <joda-time.version>2.10.13</joda-time.version>
         <jsr305.version>3.0.2</jsr305.version>
         <junit.version>4.13.2</junit.version>
-        <log4j.version>1.2.17</log4j.version>
+        <log4j.version>2.17.0</log4j.version>
         <resteasy.version>3.15.1.Final</resteasy.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <speedtools.version>3.3.0</speedtools.version>
+        <speedtools.version>3.4.0</speedtools.version>
     </properties>
 
     <distributionManagement>
