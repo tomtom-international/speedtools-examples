@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2012-2021, TomTom (http://tomtom.com).
+  ~ Copyright (C) 2012-2023, TomTom (http://tomtom.com).
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
     <artifactId>speedtools-examples</artifactId>
 
     <packaging>war</packaging>
-    <version>3.4.2.0</version>
+    <version>3.4.4.0</version>
 
     <name>SpeedTools Examples</name>
 
@@ -78,28 +78,28 @@
 
         <!-- Plugin version. -->
         <jetty-maven-plugin.version>8.1.16.v20140903</jetty-maven-plugin.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
-        <maven-jetty-plugin.version>9.4.39.v20210325</maven-jetty-plugin.version>
+        <maven-jetty-plugin.version>11.0.10</maven-jetty-plugin.version>
         <maven-remote-resources-plugin.version>1.6.0</maven-remote-resources-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 
         <!-- Library versions. -->
-        <akka-actor_2.13>2.6.17</akka-actor_2.13>
+        <akka-actor_2.13>2.8.0</akka-actor_2.13>
         <commons-lang3.version>3.8.1</commons-lang3.version>
-        <guava.version>31.0.1-jre</guava.version>
-        <guice.version>4.2.3</guice.version>
-        <jackson.version>2.13.0</jackson.version>
+        <guava.version>31.1-jre</guava.version>
+        <guice.version>5.1.0</guice.version>
+        <jackson.version>2.14.2</jackson.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <joda-time.version>2.10.13</joda-time.version>
+        <joda-time.version>2.12.5</joda-time.version>
         <jsr305.version>3.0.2</jsr305.version>
         <junit.version>4.13.2</junit.version>
-        <log4j.version>2.17.0</log4j.version>
-        <resteasy.version>3.15.1.Final</resteasy.version>
-        <slf4j.version>1.7.30</slf4j.version>
-        <speedtools.version>3.4.2</speedtools.version>
+        <log4j.version>2.20.0</log4j.version>
+        <resteasy.version>3.15.3.Final</resteasy.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <speedtools.version>3.4.4</speedtools.version>
     </properties>
 
     <distributionManagement>
