@@ -88,7 +88,7 @@
         <!-- Library versions. -->
         <akka-actor_2.13>2.8.0</akka-actor_2.13>
         <commons-lang3.version>3.8.1</commons-lang3.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <guice.version>5.1.0</guice.version>
         <jackson.version>2.14.2</jackson.version>
         <javax.inject.version>1</javax.inject.version>
